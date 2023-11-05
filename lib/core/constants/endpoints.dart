@@ -1,6 +1,8 @@
 class EndPoints {
   EndPoints._();
-  static const baseurl = "";
+  static const baseurl = "https://api.themoviedb.org/3";
+
+  static const String getPopularMovie = "/movie/popular";
 
   // receiveTimeout
   static const int receiveTimeout = 15000;
