@@ -6,9 +6,9 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioClient {
 // dio instance
-  final Dio _dio;
+  final Dio _dio = Dio();
 
-  DioClient(this._dio) {
+  DioClient() {
     _dio
       ..options.baseUrl = EndPoints.baseurl
       // ..options.connectTimeout = EndPoints.connectionTimeout as Duration?
