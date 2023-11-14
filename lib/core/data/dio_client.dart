@@ -11,6 +11,7 @@ class DioClient {
   DioClient() {
     _dio
       ..options.baseUrl = EndPoints.baseurl
+      ..options.headers['authorization'] = 'Bearer ${EndPoints.token}'
       // ..options.connectTimeout = EndPoints.connectionTimeout as Duration?
       // ..options.receiveTimeout = Endpoints.receiveTimeout
       ..interceptors.add(PrettyDioLogger());

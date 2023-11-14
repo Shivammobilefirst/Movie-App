@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_app/core/styles/app_text_theme.dart';
 import 'package:movie_app/core/styles/app_theme.dart';
+import 'package:movie_app/features/home_page/presentation/home_page.dart';
 
 class MovieApp extends StatelessWidget {
   const MovieApp({super.key});
@@ -16,8 +16,8 @@ class MovieApp extends StatelessWidget {
         final mediaQuery = MediaQuery.of(context);
         return Theme(
           data: AppTheme.lightTheme.copyWith(
-            textTheme: appTextTheme,
-          ),
+              // textTheme: appTextTheme,
+              ),
           child: MediaQuery(
             data: mediaQuery.copyWith(
               textScaleFactor: 1,
@@ -26,7 +26,7 @@ class MovieApp extends StatelessWidget {
           ),
         );
       },
-      home: const Scaffold(),
+      home: const HomePageScreen(),
     );
   }
 }
