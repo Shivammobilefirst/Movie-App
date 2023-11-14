@@ -11,13 +11,46 @@ class PopularMovieRepository {
 
   PopularMovieRepository();
 
-  Future<ApiResult<PopularMovieModel>> getPopularMovie() async {
+  Future<ApiResult<List<PopularMovieModel>>> getPopularMovie() async {
     try {
-      final response = await _client.get<String>(EndPoints.getPopularMovie);
+      final response = await _client.get<String>(
+        EndPoints.getPopularMovie,
+      );
       final jsonData = jsonDecode(response.data!) as Map<String, dynamic>;
-      final result = jsonData["results"];
-      print(result);
-      return ApiResult.success(PopularMovieModel.fromJson(result));
+      final result = jsonData["results"] as List;
+      print("results 1:- $result");
+      return ApiResult.success(
+          result.map((e) => PopularMovieModel.fromJson(e)).toList());
+    } on Exception catch (error, _) {
+      return ApiResult.failure(NetworkExceptions.getErrorMessage(error));
+    }
+  }
+
+  Future<ApiResult<List<PopularMovieModel>>> upcomingMovie() async {
+    try {
+      final response = await _client.get<String>(
+        EndPoints.upcomingMovie,
+      );
+      final jsonData = jsonDecode(response.data!) as Map<String, dynamic>;
+      final result = jsonData["results"] as List;
+      print("results  2:- $result");
+      return ApiResult.success(
+          result.map((e) => PopularMovieModel.fromJson(e)).toList());
+    } on Exception catch (error, _) {
+      return ApiResult.failure(NetworkExceptions.getErrorMessage(error));
+    }
+  }
+
+  Future<ApiResult<List<PopularMovieModel>>> topRatedMovie() async {
+    try {
+      final response = await _client.get<String>(
+        EndPoints.topRatedMovie,
+      );
+      final jsonData = jsonDecode(response.data!) as Map<String, dynamic>;
+      final result = jsonData["results"] as List;
+      print("results  3:- $result");
+      return ApiResult.success(
+          result.map((e) => PopularMovieModel.fromJson(e)).toList());
     } on Exception catch (error, _) {
       return ApiResult.failure(NetworkExceptions.getErrorMessage(error));
     }

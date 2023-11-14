@@ -8,3 +8,7 @@ abstract class PopularMovieEvent extends Equatable {
 }
 
 class PopularMovieRequested extends PopularMovieEvent {}
+
+class UpcomingMovieRequested extends PopularMovieEvent {}
+
+class TopRatedMoviesRequested extends PopularMovieEvent {}

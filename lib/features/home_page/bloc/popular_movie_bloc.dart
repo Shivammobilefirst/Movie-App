@@ -11,12 +11,15 @@ part 'popular_movie_state.dart';
 
 class PopularMovieBloc extends Bloc<PopularMovieEvent, PopularMovieState> {
   PopularMovieBloc() : super(const PopularMovieState()) {
-    on<PopularMovieEvent>(popularMovieEvent);
+    on<PopularMovieRequested>(popularMovieRequested);
+    on<UpcomingMovieRequested>(upcomingMovieRequested);
+    on<TopRatedMoviesRequested>(topRatedMoviesRequested);
   }
 
   PopularMovieRepository popularMovieRepository = PopularMovieRepository();
+  PopularMovieState popularMovieState = const PopularMovieState();
 
-  FutureOr<void> popularMovieEvent(
+  FutureOr<void> popularMovieRequested(
       PopularMovieEvent event, Emitter<PopularMovieState> emit) async {
     emit(const PopularMovieState().copyWith(status: Status.inProgress));
     final apiResult = await popularMovieRepository.getPopularMovie();
@@ -25,6 +28,46 @@ class PopularMovieBloc extends Bloc<PopularMovieEvent, PopularMovieState> {
         emit(state.copyWith(
           status: Status.loaded,
           popularMovieModel: user,
+        ));
+      },
+      failure: (error) {
+        emit(state.copyWith(
+          status: Status.failed,
+          message: error,
+        ));
+      },
+    );
+  }
+
+  FutureOr<void> upcomingMovieRequested(
+      UpcomingMovieRequested event, Emitter<PopularMovieState> emit) async {
+    emit(state.copyWith(status: Status.inProgress));
+    final apiResult = await popularMovieRepository.upcomingMovie();
+    apiResult.when(
+      success: (user) async {
+        emit(state.copyWith(
+          status: Status.loaded,
+          upcomingMovieModel: user,
+        ));
+      },
+      failure: (error) {
+        emit(state.copyWith(
+          status: Status.failed,
+          message: error,
+        ));
+      },
+    );
+  }
+
+  FutureOr<void> topRatedMoviesRequested(
+      TopRatedMoviesRequested event, Emitter<PopularMovieState> emit) async {
+    emit(state.copyWith(status: Status.inProgress));
+    final apiResult = await popularMovieRepository.topRatedMovie();
+    apiResult.when(
+      success: (user) async {
+        emit(state.copyWith(
+          status: Status.loaded,
+          topRatedMovieModel: user,
         ));
       },
       failure: (error) {
