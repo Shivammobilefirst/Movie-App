@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/styles/app_colors.dart';
 
-class AppTheme {
-  AppTheme._();
-  static ThemeData get lightTheme {
-    return ThemeData(
-      // appBarTheme: AppBarTheme(titleTextStyle: appTextTheme.headlineMedium),
-      useMaterial3: true,
-      colorScheme: const ColorScheme.light(
-        primary: AppColors.orange,
-        secondary: AppColors.orange,
-        onSecondary: Colors.white,
-        onBackground: AppColors.grey,
-        onSurface: AppColors.grey,
-        outline: AppColors.grey,
-      ),
-    );
-  }
-}
+enum AppTheme { dark, light }
+
+final appThemeData = {
+  AppTheme.dark: ThemeData(
+    brightness: Brightness.dark,
+  ),
+  AppTheme.light: ThemeData(
+    brightness: Brightness.light,
+    appBarTheme: const AppBarTheme(
+        iconTheme: IconThemeData(color: Colors.black),
+        color: Colors.white,
+        actionsIconTheme: IconThemeData(color: Colors.black)),
+  ),
+};
