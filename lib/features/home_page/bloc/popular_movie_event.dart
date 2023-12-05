@@ -12,3 +12,5 @@ class PopularMovieRequested extends PopularMovieEvent {}
 class UpcomingMovieRequested extends PopularMovieEvent {}
 
 class TopRatedMoviesRequested extends PopularMovieEvent {}
+
+class AddFavMovieRequested extends PopularMovieEvent {}
